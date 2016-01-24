@@ -6,6 +6,7 @@
 * -> { ... }, -> $foo { ... } [Pointy Block](#pointy-block)
 * <-> $foo { ... } [Double-Pointy Block](#double-pointy-block)
 * |(1, 2, 3), |@foo [List Flattening](#list-flattening)
+* $foo: [Method Invocant](#method-invocant)
 
 ## Motivation
 
@@ -91,3 +92,21 @@ This also works for parameter lists:
 Technically the pipe is equivalent to creating a [`Slip`](http://doc.perl6.org/type/Slip).
 
 Source: http://doc.perl6.org/language/list
+
+## Method Invocant
+
+    $foo:
+
+Allows one to specify the invocant of a method. This can be used to give another name to the invocant than `self`. `self` is available in both cases.
+
+    class Foo {
+        method foo { say self }
+        method bar($me:) { say $me }
+        method baz($me:) { say self }
+    }
+    # produce the same output
+    Foo.new.foo;
+    Foo.new.bar;
+    Foo.new.baz;
+
+Source: http://doc.perl6.org/type/Signature#Parameter_Separators
