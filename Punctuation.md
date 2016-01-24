@@ -5,10 +5,13 @@
 * { ... } [Block](#block)
 * -> { ... }, -> $foo { ... } [Pointy Block](#pointy-block)
 * <-> $foo { ... } [Double-Pointy Block](#double-pointy-block)
+* |(1, 2, 3), |@foo [List Flattening](#list-flattening)
 
 ## Motivation
 
 Again and again I forget what certain punctuation characters mean. Many are operators but not all so [the operators documentation](http://doc.perl6.org/language/operators) does not always help (and some are even mentioned but not documented). In addition this is notoriously hard to google. This is my attempt at collecting all punctuation that crosses my way.
+
+NOTE: All code samples are Perl 6 except where noted.
 
 ## Feed Operators
 
@@ -66,3 +69,25 @@ Same as [pointy blocks](#pointy-block) but adds the `rw` trait to all parameters
     <-> $foo { ... }
 
 Source: http://design.perl6.org/S06.html#%22Pointy_blocks%22
+
+## List Flattening
+
+    |(1, 2, 3)
+    |@foo
+
+In contrast to Perl 5 lists don't automatically flatten. If you want to flatten a list into the surrounding list, put a pipe in front of it. Flattening is only done one level deep, it is not recursive.
+
+    (1, (2, 3)) # Perl 5: (1, 2, 3)
+
+    (1, (2, 3))       # Perl 6: (1, (2, 3))
+    (1, |(2, 3))      # Perl 6: (1, 2, 3)
+    (1, |(2, (3, 4))) # Perl 6: (1, 2, (3, 4))
+
+This also works for parameter lists:
+
+    say (1, 2, 3)  # (1 2 3)
+    say |(1, 2, 3) # 123
+
+Technically the pipe is equivalent to creating a [`Slip`](http://doc.perl6.org/type/Slip).
+
+Source: http://doc.perl6.org/language/list
