@@ -7,6 +7,7 @@
 * <-> $foo { ... } [Double-Pointy Block](#double-pointy-block)
 * |(1, 2, 3), |@foo [List Flattening](#list-flattening)
 * $foo: [Method Invocant](#method-invocant)
+* -->: [Return Specification](#return-specification)
 
 ## Motivation
 
@@ -110,3 +111,18 @@ Allows one to specify the invocant of a method. This can be used to give another
     Foo.new.baz;
 
 Source: http://doc.perl6.org/type/Signature#Parameter_Separators
+
+## Return Specification
+
+    sub foo($foo, --> Foo) { ... }
+    my @foo[--> Foo];
+
+Allows to specify the return type of a routine and is therefore an alternative syntax to
+
+    sub foo($foo) returns Foo { ... }
+
+Allows the creation of typed arrays and is therefore an alternative syntax to
+
+    my Foo @foo;
+
+Source: http://design.perl6.org/S06.html#Named_subroutines, http://design.perl6.org/S09.html#Typed_arrays
