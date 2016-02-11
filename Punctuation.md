@@ -7,6 +7,7 @@
 * <-> $foo { ... } [Double-Pointy Block](#double-pointy-block)
 * |(1, 2, 3), |@foo [List Flattening](#list-flattening)
 * $foo: [Method Invocant](#method-invocant)
+* method foo(Foo:) { ... } [Invocant Type](#invocant-type)
 * -->: [Return Specification](#return-specification)
 
 ## Motivation
@@ -111,6 +112,13 @@ Allows one to specify the invocant of a method. This can be used to give another
     Foo.new.baz;
 
 Source: http://doc.perl6.org/type/Signature#Parameter_Separators
+
+## Invocant Type
+
+    method foo(Foo:) { ... }
+    method foo(Foo: $arg1) { ... }
+
+Allows to specify the type on which the method is invoked on. This is usually the type the method is defined in but can be any other type as well. This is sometimes done for the documentation to make things explicit but not actually needed in code. Note that the first argument is not separated by a comma.
 
 ## Return Specification
 
